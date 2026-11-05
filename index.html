@@ -1,3 +1,5 @@
+---
+---
 <!doctype html>
 <html lang="zh-CN">
   <head>
@@ -25,7 +27,7 @@
         <nav class="main-nav" aria-label="主导航">
           <a href="#journal">日记</a>
           <a href="#about">关于这里</a>
-          <a href="posts/2026-11-05-first-day.html">读一篇</a>
+          <a href="{{ site.posts.first.url | relative_url }}">读一篇</a>
         </nav>
       </header>
 
@@ -57,16 +59,18 @@
           </div>
 
           <div class="entries">
-            <article class="entry entry-featured">
-              <time class="entry-date" datetime="2026-11-05"><span>2026</span><strong>11 / 05</strong></time>
+            {% for post in site.posts %}
+            <article class="entry{% if forloop.first %} entry-featured{% endif %}">
+              <time class="entry-date" datetime="{{ post.date | date: '%Y-%m-%d' }}"><span>{{ post.date | date: '%Y' }}</span><strong>{{ post.date | date: '%m / %d' }}</strong></time>
               <div class="entry-main">
-                <div class="entry-labels"><span class="pill">日记</span><span>开站小记</span></div>
-                <h3><a href="posts/2026-11-05-first-day.html">从今天开始，留下痕迹 <span aria-hidden="true">↗</span></a></h3>
-                <p>这里不需要每天都有大事发生。一个突然冒出的念头、一件值得高兴的小事，都可以写下来。</p>
-                <a class="read-more" href="posts/2026-11-05-first-day.html">读这篇 <span aria-hidden="true">→</span></a>
+                <div class="entry-labels"><span class="pill">日记</span>{% if post.tag %}<span>{{ post.tag | escape }}</span>{% endif %}</div>
+                <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }} <span aria-hidden="true">↗</span></a></h3>
+                <p>{{ post.description | default: post.excerpt | strip_html | truncate: 90 | escape }}</p>
+                <a class="read-more" href="{{ post.url | relative_url }}">读这篇 <span aria-hidden="true">→</span></a>
               </div>
-              <div class="entry-number" aria-hidden="true">01</div>
+              <div class="entry-number" aria-hidden="true">{{ forloop.index }}</div>
             </article>
+            {% endfor %}
           </div>
         </section>
 
