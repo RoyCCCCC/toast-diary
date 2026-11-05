@@ -1,0 +1,13 @@
+title: Toast 的奇妙日常
+url: https://toastcl.com
+timezone: Asia/Shanghai
+permalink: /diary/:year/:month/:day/:title/
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      category: 日记
+exclude:
+  - README.md
