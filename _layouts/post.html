@@ -34,10 +34,17 @@
           <div class="post-heading"><span>THE JOURNAL / 日记</span><span>{{ page.date | date: '%Y / %m / %d' }}</span></div>
           <p class="post-date"><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y 年 %m 月 %d 日' }}</time>{% for tag in page.tags %} · {{ tag | escape }}{% endfor %}</p>
           <h1>{{ page.title | escape }}</h1>
+          <a class="post-replies" href="#comments"><span id="reply-count">写条回复</span> ↘</a>
           {% if page.lead %}<p class="post-lead">{{ page.lead | escape }}</p>{% endif %}
           {{ content }}
           <a href="{{ '/' | relative_url }}#journal" class="back-link">← 回到日记列表</a>
         </article>
+        <section class="comments" id="comments" aria-labelledby="comments-title">
+          <p class="section-kicker">THE CONVERSATION / 留言</p>
+          <h2 id="comments-title">聊聊这篇<span class="heading-dot">.</span></h2>
+          <p>用 GitHub 账号登录，就能留言、回复，也可以写下自己的补充。</p>
+          <div class="giscus"></div>
+        </section>
         <dialog class="image-lightbox" aria-label="图片预览">
           <button type="button" aria-label="关闭图片预览">×</button>
           <img alt="" />
@@ -71,6 +78,25 @@
       lightbox.addEventListener('click', (event) => {
         if (event.target === lightbox) lightbox.close();
       });
+      window.addEventListener('message', (event) => {
+        if (event.origin !== 'https://giscus.app' || !event.data?.giscus?.discussion) return;
+        const count = event.data.giscus.discussion.totalCommentCount;
+        if (typeof count === 'number') document.querySelector('#reply-count').textContent = `${count} 条回复`;
+      });
     </script>
+    <script src="https://giscus.app/client.js"
+            data-repo="RoyCCCCC/toast-diary"
+            data-repo-id="R_kgDOVjaMmw"
+            data-category="Announcements"
+            data-category-id="DIC_kwDOVjaMm84DKbY-"
+            data-mapping="pathname"
+            data-strict="1"
+            data-reactions-enabled="0"
+            data-emit-metadata="1"
+            data-input-position="top"
+            data-theme="light"
+            data-lang="zh-CN"
+            crossorigin="anonymous"
+            async></script>
   </body>
 </html>
