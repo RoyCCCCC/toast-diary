@@ -154,6 +154,8 @@ a:focus-visible { outline: 2px solid var(--orange); outline-offset: 5px; }
   .post { padding: 64px 0 78px; }
   .post p { font-size: 15px; }
   .post blockquote { font-size: 20px; }
+  .image-lightbox { max-width: calc(100vw - 8px); padding: 20px 8px 8px; }
+  .image-lightbox img { max-width: calc(100vw - 24px); max-height: calc(100vh - 40px); }
   .topics { padding: 61px 0 78px; }
   .topic-group li { gap: 12px; }
   .about { grid-template-columns: 1fr; gap: 20px; padding: 50px 25px 58px; }
