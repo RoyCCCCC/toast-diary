@@ -24,6 +24,7 @@
         </a>
         <nav class="main-nav" aria-label="主导航">
           <a href="{{ '/' | relative_url }}#journal">日记</a>
+          <a href="{{ '/topics/' | relative_url }}">板块</a>
           <a href="{{ '/' | relative_url }}#about">关于这里</a>
         </nav>
       </header>
@@ -31,15 +32,45 @@
       <main>
         <article class="post">
           <div class="post-heading"><span>THE JOURNAL / 日记</span><span>{{ page.date | date: '%Y / %m / %d' }}</span></div>
-          <p class="post-date"><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y 年 %m 月 %d 日' }}</time>{% if page.tag %} · {{ page.tag | escape }}{% endif %}</p>
+          <p class="post-date"><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y 年 %m 月 %d 日' }}</time>{% for tag in page.tags %} · {{ tag | escape }}{% endfor %}</p>
           <h1>{{ page.title | escape }}</h1>
           {% if page.lead %}<p class="post-lead">{{ page.lead | escape }}</p>{% endif %}
           {{ content }}
           <a href="{{ '/' | relative_url }}#journal" class="back-link">← 回到日记列表</a>
         </article>
+        <dialog class="image-lightbox" aria-label="图片预览">
+          <button type="button" aria-label="关闭图片预览">×</button>
+          <img alt="" />
+        </dialog>
       </main>
 
       <footer class="site-footer"><span>© {{ site.time | date: '%Y' }} Toast 的奇妙日常</span><span>把普通日子，写成自己的奇妙冒险。</span><a href="#top">回到顶部 ↑</a></footer>
     </div>
+    <script>
+      const lightbox = document.querySelector('.image-lightbox');
+      const preview = lightbox.querySelector('img');
+      document.querySelectorAll('.post img').forEach((img) => {
+        img.setAttribute('role', 'button');
+        img.setAttribute('tabindex', '0');
+        img.setAttribute('aria-label', `放大图片：${img.alt || '日记图片'}`);
+        const open = () => {
+          preview.src = img.currentSrc || img.src;
+          preview.alt = img.alt;
+          lightbox.showModal();
+          lightbox.querySelector('button').focus();
+        };
+        img.addEventListener('click', open);
+        img.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            open();
+          }
+        });
+      });
+      lightbox.querySelector('button').addEventListener('click', () => lightbox.close());
+      lightbox.addEventListener('click', (event) => {
+        if (event.target === lightbox) lightbox.close();
+      });
+    </script>
   </body>
 </html>
