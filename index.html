@@ -26,8 +26,8 @@
         </a>
         <nav class="main-nav" aria-label="主导航">
           <a href="#journal">日记</a>
+          <a href="{{ '/topics/' | relative_url }}">板块</a>
           <a href="#about">关于这里</a>
-          <a href="{{ site.posts.first.url | relative_url }}">读一篇</a>
         </nav>
       </header>
 
@@ -63,9 +63,11 @@
             <article class="entry{% if forloop.first %} entry-featured{% endif %}">
               <time class="entry-date" datetime="{{ post.date | date: '%Y-%m-%d' }}"><span>{{ post.date | date: '%Y' }}</span><strong>{{ post.date | date: '%m / %d' }}</strong></time>
               <div class="entry-main">
-                <div class="entry-labels"><span class="pill">日记</span>{% if post.tag %}<span>{{ post.tag | escape }}</span>{% endif %}</div>
+                <div class="entry-labels"><span class="pill">日记</span>{% for tag in post.tags %}<span>{{ tag | escape }}</span>{% endfor %}</div>
                 <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }} <span aria-hidden="true">↗</span></a></h3>
-                <p>{{ post.description | default: post.excerpt | strip_html | truncate: 90 | escape }}</p>
+                {% assign summary = post.description | default: post.excerpt | strip_html | strip %}
+                {% if summary == '' %}{% assign summary = post.content | strip_html | strip %}{% endif %}
+                <p>{{ summary | truncate: 90 | escape }}</p>
                 <a class="read-more" href="{{ post.url | relative_url }}">读这篇 <span aria-hidden="true">→</span></a>
               </div>
               <div class="entry-number" aria-hidden="true">{{ forloop.index }}</div>

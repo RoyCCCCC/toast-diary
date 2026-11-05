@@ -90,7 +90,28 @@ a:focus-visible { outline: 2px solid var(--orange); outline-offset: 5px; }
 .post .post-lead { font-size: 19px; font-weight: 700; }
 .post blockquote { margin: 36px 0; padding: 5px 0 5px 22px; border-left: 4px solid var(--orange); color: var(--orange-dark); font-family: "Songti SC", "Noto Serif CJK SC", "SimSun", serif; font-size: 24px; font-weight: 700; line-height: 1.6; }
 .post cite { display: block; margin-top: 8px; color: var(--muted); font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 12px; font-style: normal; font-weight: 400; }
+.post img { display: block; max-width: 100%; height: auto; margin: 0 auto; cursor: zoom-in; }
+.post img:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
+.image-lightbox { max-width: calc(100vw - 32px); max-height: calc(100vh - 32px); padding: 24px; border: 0; background: var(--paper); box-shadow: 0 16px 60px #0005; }
+.image-lightbox::backdrop { background: #171412d9; }
+.image-lightbox img { display: block; max-width: calc(100vw - 80px); max-height: calc(100vh - 80px); object-fit: contain; }
+.image-lightbox button { position: absolute; top: 1px; right: 6px; border: 0; background: transparent; color: var(--ink); font-size: 28px; line-height: 1; cursor: pointer; }
 .back-link { display: inline-block; margin-top: 18px; color: var(--orange-dark); font-size: 12px; font-weight: 700; }
+
+.topics { max-width: 900px; margin: 0 auto; padding: 78px 0 105px; }
+.topics h1 { margin: 14px 0 14px; font-family: "Songti SC", "Noto Serif CJK SC", "SimSun", serif; font-size: clamp(36px, 4vw, 50px); }
+.topics-intro { margin: 0 0 35px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.topic-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 43px; }
+.topic-nav a { padding: 9px 13px; border: 1px solid var(--line); background: #fffdf7; font-size: 13px; }
+.topic-nav a:hover { border-color: var(--orange); color: var(--orange-dark); }
+.topic-nav span { margin-left: 9px; color: var(--muted); font-family: Georgia, serif; }
+.topic-group { padding: 30px 0 20px; border-top: 1px solid var(--ink); scroll-margin-top: 20px; }
+.topic-group h2 { margin: 0 0 20px; font-family: "Songti SC", "Noto Serif CJK SC", "SimSun", serif; font-size: 27px; }
+.topic-group h2 span { margin-left: 10px; color: var(--orange-dark); font-family: Georgia, serif; font-size: 16px; font-weight: 400; }
+.topic-group ul { margin: 0; padding: 0; list-style: none; }
+.topic-group li { display: flex; gap: 25px; padding: 14px 0; border-top: 1px solid var(--line); font-size: 15px; }
+.topic-group time { min-width: 90px; color: var(--muted); font-family: Georgia, serif; font-size: 13px; }
+.topic-group li a:hover { color: var(--orange-dark); }
 
 .about { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 50px; padding: 66px 6% 75px; overflow: hidden; background: #eadfce; }
 .about-mark { position: absolute; top: -65px; right: 17%; color: #dbbe94; font-family: "Segoe UI Symbol", sans-serif; font-size: 250px; line-height: 1; }
@@ -111,7 +132,6 @@ a:focus-visible { outline: 2px solid var(--orange); outline-offset: 5px; }
   .brand-text strong { font-size: 24px; }
   .brand-text small { font-size: 12px; }
   .main-nav { gap: 13px; font-size: 11px; }
-  .main-nav a:nth-child(2) { display: none; }
   .hero { min-height: 0; padding: 34px 0 38px; }
   .eyebrow { font-size: 9px; }
   .hero h1 { margin-top: 17px; font-size: clamp(38px, 10vw, 52px); }
@@ -134,8 +154,13 @@ a:focus-visible { outline: 2px solid var(--orange); outline-offset: 5px; }
   .post { padding: 64px 0 78px; }
   .post p { font-size: 15px; }
   .post blockquote { font-size: 20px; }
+  .topics { padding: 61px 0 78px; }
+  .topic-group li { gap: 12px; }
   .about { grid-template-columns: 1fr; gap: 20px; padding: 50px 25px 58px; }
   .about-mark { right: -5px; font-size: 190px; }
   .site-footer { flex-wrap: wrap; padding: 27px 0 34px; }
   .site-footer span:nth-child(2) { display: none; }
+}
+@media (max-width: 380px) {
+  .brand-text small { display: none; }
 }

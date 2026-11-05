@@ -1,0 +1,54 @@
+---
+permalink: /topics/
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f3eb" />
+    <title>板块｜Toast 的奇妙日常</title>
+    <meta name="description" content="按标签翻阅 Toast 的日记与随笔。" />
+    <link rel="canonical" href="{{ page.url | absolute_url }}" />
+    <link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml" />
+    <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}" />
+  </head>
+  <body id="top">
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="{{ '/' | relative_url }}" aria-label="Toast 的奇妙日常，返回首页">
+          <span class="brand-icon" aria-hidden="true">✳</span>
+          <span class="brand-text"><strong>Toast</strong><small>的奇妙日常</small></span>
+        </a>
+        <nav class="main-nav" aria-label="主导航">
+          <a href="{{ '/' | relative_url }}#journal">日记</a>
+          <a href="{{ '/topics/' | relative_url }}" aria-current="page">板块</a>
+          <a href="{{ '/' | relative_url }}#about">关于这里</a>
+        </nav>
+      </header>
+
+      <main class="topics">
+        <p class="section-kicker">THE TOPICS / 板块</p>
+        <h1>按兴趣翻阅<span class="heading-dot">.</span></h1>
+        <p class="topics-intro">每篇日记的标签都会自动收进这里。点一个板块，看看相关的记录。</p>
+        <nav class="topic-nav" aria-label="日记板块">
+          {% for tag in site.tags %}
+          <a href="#tag-{{ forloop.index }}">{{ tag[0] | escape }}<span>{{ tag[1].size }}</span></a>
+          {% endfor %}
+        </nav>
+        {% for tag in site.tags %}
+        <section class="topic-group" id="tag-{{ forloop.index }}" aria-labelledby="tag-title-{{ forloop.index }}">
+          <h2 id="tag-title-{{ forloop.index }}">{{ tag[0] | escape }}<span>{{ tag[1].size }} 篇</span></h2>
+          <ul>
+            {% for post in tag[1] %}
+            <li><time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%Y.%m.%d' }}</time><a href="{{ post.url | relative_url }}">{{ post.title | escape }} ↗</a></li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endfor %}
+      </main>
+
+      <footer class="site-footer"><span>© {{ site.time | date: '%Y' }} Toast 的奇妙日常</span><span>把普通日子，写成自己的奇妙冒险。</span><a href="#top">回到顶部 ↑</a></footer>
+    </div>
+  </body>
+</html>
