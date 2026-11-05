@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f3eb" />
+    <title>{{ page.title | escape }}｜Toast 的奇妙日常</title>
+    <meta name="description" content="{{ page.description | default: page.excerpt | strip_html | truncate: 150 | escape }}" />
+    <link rel="canonical" href="{{ page.url | absolute_url }}" />
+    <link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{ page.title | escape }}" />
+    <meta property="og:description" content="{{ page.description | default: page.excerpt | strip_html | truncate: 150 | escape }}" />
+    <meta property="og:url" content="{{ page.url | absolute_url }}" />
+    <meta property="og:image" content="{{ '/toast.png' | absolute_url }}" />
+    <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}" />
+  </head>
+  <body id="top">
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="{{ '/' | relative_url }}" aria-label="Toast 的奇妙日常，返回首页">
+          <span class="brand-icon" aria-hidden="true">✳</span>
+          <span class="brand-text"><strong>Toast</strong><small>的奇妙日常</small></span>
+        </a>
+        <nav class="main-nav" aria-label="主导航">
+          <a href="{{ '/' | relative_url }}#journal">日记</a>
+          <a href="{{ '/' | relative_url }}#about">关于这里</a>
+        </nav>
+      </header>
+
+      <main>
+        <article class="post">
+          <div class="post-heading"><span>THE JOURNAL / 日记</span><span>{{ page.date | date: '%Y / %m / %d' }}</span></div>
+          <p class="post-date"><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y 年 %m 月 %d 日' }}</time>{% if page.tag %} · {{ page.tag | escape }}{% endif %}</p>
+          <h1>{{ page.title | escape }}</h1>
+          {% if page.lead %}<p class="post-lead">{{ page.lead | escape }}</p>{% endif %}
+          {{ content }}
+          <a href="{{ '/' | relative_url }}#journal" class="back-link">← 回到日记列表</a>
+        </article>
+      </main>
+
+      <footer class="site-footer"><span>© {{ site.time | date: '%Y' }} Toast 的奇妙日常</span><span>把普通日子，写成自己的奇妙冒险。</span><a href="#top">回到顶部 ↑</a></footer>
+    </div>
+  </body>
+</html>
