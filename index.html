@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f6f3eb" />
     <title>Toast 的奇妙日常</title>
-    <meta name="description" content="把普通日子，写成自己的奇妙冒险。Toast 的日记与随笔。" />
+    <meta name="description" content="把普通日子，写成自己的奇妙冒险。Toast 的文章、随笔与日常记录。" />
     <link rel="canonical" href="https://toastcl.com/" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content="website" />
@@ -25,8 +25,9 @@
           <span class="brand-text"><strong>Toast</strong><small>的奇妙日常</small></span>
         </a>
         <nav class="main-nav" aria-label="主导航">
-          <a href="#journal">日记</a>
+          <a href="#journal">文章</a>
           <a href="{{ '/topics/' | relative_url }}">板块</a>
+          <a href="{{ '/archive/' | relative_url }}">归档</a>
           <a href="#about">关于这里</a>
         </nav>
       </header>
@@ -37,7 +38,7 @@
             <p class="eyebrow"><span class="eyebrow-line"></span> A LITTLE CORNER OF THE INTERNET <span class="eyebrow-star">✳</span></p>
             <h1 id="hero-title">普通的日子，<br /><em>也有奇妙的故事。</em></h1>
             <p class="hero-tagline">把普通日子，写成自己的奇妙冒险。</p>
-            <a class="hero-link" href="#journal"><span>翻开日记</span><span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="hero-link" href="#journal"><span>读点文章</span><span class="arrow" aria-hidden="true">↗</span></a>
           </div>
 
           <div class="hero-art">
@@ -45,7 +46,7 @@
             <span class="art-spark spark-two" aria-hidden="true">✦</span>
             <div class="postcard">
               <div class="postcard-top"><span>TOAST'S NOTEBOOK</span><span>NO. 001</span></div>
-              <img class="toast-drawing" src="toast.png" alt="戴着黑帽、神情坚定的漫画吐司" width="1254" height="1254" />
+              <picture><source srcset="toast.webp" type="image/webp" /><img class="toast-drawing" src="toast.png" alt="戴着黑帽、神情坚定的漫画吐司" width="1254" height="1254" /></picture>
               <div class="postcard-bottom"><span>平凡，也是主角。</span><span class="handwritten">to be continued ↗</span></div>
             </div>
             <span class="art-caption">日常冒险手册 / VOL. 01</span>
@@ -54,16 +55,16 @@
 
         <section class="journal" id="journal" aria-labelledby="journal-title">
           <div class="section-heading">
-            <div><p class="section-kicker">THE JOURNAL / 日记</p><h2 id="journal-title">最近的记录<span class="heading-dot">.</span></h2></div>
+            <div><p class="section-kicker">THE WRITING / 文章</p><h2 id="journal-title">最近的文章<span class="heading-dot">.</span></h2></div>
             <span class="section-note">按时间慢慢往下翻 ↘</span>
           </div>
 
           <div class="entries">
-            {% for post in site.posts %}
+            {% for post in site.posts limit:8 %}
             <article class="entry{% if forloop.first %} entry-featured{% endif %}">
               <time class="entry-date" datetime="{{ post.date | date: '%Y-%m-%d' }}"><span>{{ post.date | date: '%Y' }}</span><strong>{{ post.date | date: '%m / %d' }}</strong></time>
               <div class="entry-main">
-                <div class="entry-labels"><span class="pill">日记</span>{% for tag in post.tags %}<span>{{ tag | escape }}</span>{% endfor %}</div>
+                {% if post.tags.size > 0 %}<div class="entry-labels">{% for tag in post.tags %}<span class="pill">{{ tag | escape }}</span>{% endfor %}</div>{% endif %}
                 <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }} <span aria-hidden="true">↗</span></a></h3>
                 {% assign summary = post.description | default: post.excerpt | strip_html | strip %}
                 {% if summary == '' %}{% assign summary = post.content | strip_html | strip %}{% endif %}
@@ -74,16 +75,17 @@
             </article>
             {% endfor %}
           </div>
+          <a class="archive-link" href="{{ '/archive/' | relative_url }}">查看全部文章 <span aria-hidden="true">→</span></a>
         </section>
 
-        <section class="quote-break" aria-label="日记里的小提示">
+        <section class="quote-break" aria-label="写作的小提示">
           <span aria-hidden="true">✳</span><p>每个寻常的今天，<em>都值得一个小小的记号。</em></p><span aria-hidden="true">✳</span>
         </section>
 
         <section class="about" id="about" aria-labelledby="about-title">
           <span class="about-mark" aria-hidden="true">✳</span>
           <div><p class="section-kicker">ABOUT THIS PLACE / 关于这里</p><h2 id="about-title">给普通日子，<br />留一盏小灯。</h2></div>
-          <p>日记、随笔、偶尔的摘录。这里会慢慢装下 Toast 想公开分享的生活片段。没有更新压力，想写的时候就写。</p>
+          <p>文章、随笔、日记，偶尔也有摘录。这里会慢慢装下 Toast 想公开分享的想法和生活片段。没有更新压力，想写的时候就写。</p>
         </section>
       </main>
 

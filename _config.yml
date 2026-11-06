@@ -8,6 +8,5 @@ defaults:
       type: posts
     values:
       layout: post
-      category: 日记
 exclude:
   - README.md

@@ -8,7 +8,7 @@ permalink: /topics/
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f6f3eb" />
     <title>板块｜Toast 的奇妙日常</title>
-    <meta name="description" content="按标签翻阅 Toast 的日记与随笔。" />
+    <meta name="description" content="按标签翻阅 Toast 的文章与随笔。" />
     <link rel="canonical" href="{{ page.url | absolute_url }}" />
     <link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml" />
     <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}" />
@@ -21,8 +21,9 @@ permalink: /topics/
           <span class="brand-text"><strong>Toast</strong><small>的奇妙日常</small></span>
         </a>
         <nav class="main-nav" aria-label="主导航">
-          <a href="{{ '/' | relative_url }}#journal">日记</a>
+          <a href="{{ '/' | relative_url }}#journal">文章</a>
           <a href="{{ '/topics/' | relative_url }}" aria-current="page">板块</a>
+          <a href="{{ '/archive/' | relative_url }}">归档</a>
           <a href="{{ '/' | relative_url }}#about">关于这里</a>
         </nav>
       </header>
@@ -30,8 +31,8 @@ permalink: /topics/
       <main class="topics">
         <p class="section-kicker">THE TOPICS / 板块</p>
         <h1>按兴趣翻阅<span class="heading-dot">.</span></h1>
-        <p class="topics-intro">每篇日记的标签都会自动收进这里。点一个板块，看看相关的记录。</p>
-        <nav class="topic-nav" aria-label="日记板块">
+        <p class="topics-intro">文章中填写的标签会自动收进这里。点一个板块，看看相关的内容。</p>
+        <nav class="topic-nav" aria-label="文章板块">
           {% for tag in site.tags %}
           <a href="#tag-{{ forloop.index }}">{{ tag[0] | escape }}<span>{{ tag[1].size }}</span></a>
           {% endfor %}
