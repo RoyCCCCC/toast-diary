@@ -23,21 +23,28 @@
           <span class="brand-text"><strong>Toast</strong><small>的奇妙日常</small></span>
         </a>
         <nav class="main-nav" aria-label="主导航">
-          <a href="{{ '/' | relative_url }}#journal">日记</a>
+          <a href="{{ '/' | relative_url }}#journal">文章</a>
           <a href="{{ '/topics/' | relative_url }}">板块</a>
+          <a href="{{ '/archive/' | relative_url }}">归档</a>
           <a href="{{ '/' | relative_url }}#about">关于这里</a>
         </nav>
       </header>
 
       <main>
         <article class="post">
-          <div class="post-heading"><span>THE JOURNAL / 日记</span><span>{{ page.date | date: '%Y / %m / %d' }}</span></div>
+          <div class="post-heading"><span>THE WRITING / 文章</span><span>{{ page.date | date: '%Y / %m / %d' }}</span></div>
           <p class="post-date"><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y 年 %m 月 %d 日' }}</time>{% for tag in page.tags %} · {{ tag | escape }}{% endfor %}</p>
           <h1>{{ page.title | escape }}</h1>
           <a class="post-replies" href="#comments"><span id="reply-count">写条回复</span> ↘</a>
           {% if page.lead %}<p class="post-lead">{{ page.lead | escape }}</p>{% endif %}
-          {{ content }}
-          <a href="{{ '/' | relative_url }}#journal" class="back-link">← 回到日记列表</a>
+          {{ content | replace: '<img ', '<img loading="lazy" decoding="async" ' }}
+          <a href="{{ '/archive/' | relative_url }}" class="back-link">← 查看全部文章</a>
+          {% if page.next or page.previous %}
+          <nav class="post-pagination" aria-label="上一篇和下一篇文章">
+            {% if page.next %}<a href="{{ page.next.url | relative_url }}"><span>← 上一篇</span><strong>{{ page.next.title | escape }}</strong></a>{% endif %}
+            {% if page.previous %}<a href="{{ page.previous.url | relative_url }}"><span>下一篇 →</span><strong>{{ page.previous.title | escape }}</strong></a>{% endif %}
+          </nav>
+          {% endif %}
         </article>
         <section class="comments" id="comments" aria-labelledby="comments-title">
           <p class="section-kicker">THE CONVERSATION / 留言</p>
@@ -59,7 +66,7 @@
       document.querySelectorAll('.post img').forEach((img) => {
         img.setAttribute('role', 'button');
         img.setAttribute('tabindex', '0');
-        img.setAttribute('aria-label', `放大图片：${img.alt || '日记图片'}`);
+        img.setAttribute('aria-label', `放大图片：${img.alt || '文章图片'}`);
         const open = () => {
           preview.src = img.currentSrc || img.src;
           preview.alt = img.alt;
